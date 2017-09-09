@@ -1,0 +1,176 @@
+##set($layout_template="_setting")
+##set($title = "")
+
+#define($cssHtml)
+
+<style type="text/css">
+
+.well-section {
+    border-right: 1px solid #ddd;
+    margin: -20px 0px;
+    padding: 20px 15px;
+    font-size: 22px;
+}
+.well-section .pd {
+	padding-top: 10px;
+	color: red; 
+}
+.form-input {
+	width: 160px;
+	display: inline-block;
+}
+
+</style>
+
+#end
+
+<div id="jCrumbs" class="breadCrumb module">
+    <ul>
+        <li>
+            <a href="#">
+                <i class="glyphicon glyphicon-home"></i>
+            </a>
+        </li>
+        <li>
+            <a href="#">销售管理</a>
+        </li>
+        <li>报表</li>
+    </ul>
+</div>
+<div class="row">
+    <div class="col-sm-12 col-md-12">
+    
+		<div class="formSep">
+			<div class="row">
+				<div class="col-sm-4 col-md-4">
+					<input class="form-control datetimepicker" />
+				</div>
+				<div class="col-sm-offset-4  col-sm-4  col-md-offset-4 col-md-4">
+	    			<div class="form-inline">
+	    				<div class="form-group">
+	    					<label style="display: inline-block">门店: </label>
+	    					<select class="form-control" style="width: 120px">
+	    						<option value="">全部</option>
+	    					</select>	
+	    				</div>
+	    				<a href="#" class="btn btn-default pull-right">导出execl</a>
+	    			</div>
+    			</div>
+			</div>
+		</div>
+    		
+		<div class="well">
+			
+			<div class="row">
+			
+				<div class="col-sm-2 col-md-2 well-section" >
+					<div>销售笔数</div>
+					<div class="pd">2</div>	
+				</div>
+				<div class="col-sm-2 col-md-2 well-section">
+					<div>销售额</div>
+					<div class="pd">2750.00</div>
+				</div>
+				<div class="col-sm-2 col-md-2 well-section">销售毛利
+					<div class="pd">1550.00</div>
+				</div>
+				<div class="col-sm-2 col-md-2 well-section">毛利率
+					<div class="pd">56。36%</div>
+				</div>
+				<div class="col-sm-2 col-md-2 well-section">代收款
+					<div class="pd">2750.00</div>
+				</div>
+				<div class="col-sm-2 col-md-2 well-section" style="border: none">回款率
+					<div class="pd">56.36%</div>
+				</div>
+			
+			</div>
+		
+		</div>
+	    	<form class="form-horizontal form_validation_ttip" method="post" action="$homeModule.getTarget("#")" novalidate="novalidate">
+	            
+                <div class="row">
+                    <div class="col-sm-4 col-md-4">
+                   	    <div class="btn-group">
+		    				<a href="#" class="btn btn-primary">按商品</a>
+		    				<a href="#" class="btn btn-default">按客户</a>
+							<a href="#" class="btn btn-default">按单据</a>
+		    			</div>
+                    </div>
+                   <div class="col-sm-8 col-md-8">
+                   	     
+                   	     <div class="col-sm-6 col-md-6">
+	                   	    <label class="control-label col-sm-4 col-md-4">
+	                        	商品分类：
+	                        </label>
+	                        <div class="col-sm-8 col-md-8">
+	                        	<select id="name" name="alarmGroup.name" class="form-control" >
+	                        		<option>全部</option>
+	                        	</select>
+	                        	<span class="help-block"></span>
+	                        </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6">
+							<button class="btn btn-default pull-right">搜索</button>
+		                    <input id="name" name="alarmGroup.name" class="form-control form-input pull-right" type="text" placceholder="搜索编号、名称、规格、属性">
+                        </div>
+                    </div>
+                </div>
+            
+	            #**
+	            <div class="form-actions">
+	                <button class="btn btn-primary" type="submit">搜索</button>
+	            </div>
+	            *#
+	        </form>
+    	
+        <table class="table table-bordered table-striped table_vam table-responsive" id="dt_gal">
+            <thead>
+	            <tr>
+	                <th class="table_checkbox">
+	                    <input name="select_rows" class="select_rows" data-tableid="dt_gal" type="checkbox"/>
+	                </th>
+	                <th>序号</th>
+	                <th>商品编号</th>
+	                <th>商品名称</th>
+	                <th>规格</th>
+	                <th>属性</th>
+	                <th>单位</th>
+	                <th>销售 量</th>
+	                <th style="width:200px">操作</th>
+	            </tr>
+            </thead>
+            <tbody>
+                #if($!alarmGroupList && $!alarmGroupList.size()>0)
+                    #foreach($this in $alarmGroupList)
+                    <tr>
+                        <td>
+                            <input name="row_sel" class="select_row" type="checkbox" value="$!this.id" />
+                        </td>
+                        <th>$!this.id</th>
+		                <th>$!this.name</th>
+		                <th>#showAlarmGroupRule($!this.monitorType)</th>
+		                <th>$!this.monitorStartHour ~ $!this.monitorEndHour</th>
+		                <th>$!this.memo</th>
+		                <th>$!dateFormatUtils.format($!this.modified,"yyyy-MM-dd HH:mm:ss")</th>
+                        <td>
+                        	<a href="$homeModule.getTarget("setting/alarmGroup_toAlarmGroupEdit.action").addQueryData("id","$!this.id")" class="sepV_a" title="">
+                            	<span class="glyphicon glyphicon-pencil"></span>修改
+                            </a>
+                            <a href="#" class="delete_rows" data-delid="$!this.id" data-delurl="$homeModule.getTarget("setting/alarmGroup_alarmGroupDeleteResult.action")" title="">
+                                <span class="glyphicon glyphicon-trash"></span>删除
+                            </a>
+                        </td>
+                    </tr>
+                    #end
+                #end
+            </tbody>
+        </table>
+    </div>
+</div>
+
+#define($scriptHtml)
+
+<script src="$!homeModule.getTarget("main/business/sale/report-list.js")" />
+
+#end

@@ -1,0 +1,161 @@
+
+#set($menuParent = "financial")
+#set($menu = "financial_cost_list")
+
+<div id="jCrumbs" class="breadCrumb module">
+    <ul>
+        <li>
+            <a href="#">
+                <i class="glyphicon glyphicon-home"></i>
+            </a>
+        </li>
+        <li>
+            <a href="#">财务管理</a>
+        </li>
+        <li>支出列表</li>
+    </ul>
+</div>
+<div class="row">
+    <div class="col-sm-12 col-md-12">
+		<div class="formSep">
+			<div class="btn-group">
+				<a href="/financial/cost/add.html" class="btn btn-success">新建支出</a>
+				<a href="#" class="btn btn-default">导出execl</a>
+			</div>
+		</div>
+    	<div class="well">
+	    	<form class="form_validation_ttip" method="get" action="/financial/cost/list.html" novalidate="novalidate">
+	            
+                <div class="row">
+                    <div class="col-sm-2 col-md-2">
+                   	    <label>
+                        	门店：
+                        </label>
+                        <select id="storeId" name="storeId" class="form-control" type="text">
+                        	<option value="0">全部</option>
+                            #foreach($store in $tStores)
+                                <option value="$store.id">$store.name</option>
+                            #end
+                        </select>
+                        <span class="help-block"></span>
+                    </div>
+                    <div class="col-sm-2 col-md-2">
+                   	    <label>
+                        	账目类型：
+                        </label>
+                        <select id="type" name="type" class="form-control" type="text">
+                            <option value="0">全部</option>
+                            <option value="1">销售费用</option>
+                            <option value="2">管理费用</option>
+                        </select>
+                        <span class="help-block"></span>
+                    </div>
+                    <div class="col-sm-2 col-md-2">
+                   	     <label>
+                        	经手人：
+                        </label>
+                        <select id="handler" name="handler" class="form-control" type="text">
+                        	<option value="0">全部</option>
+                            #foreach($employee in $tEmployees)
+                                <option value="$employee.id">$employee.name</option>
+                            #end
+                        </select>
+                        <span class="help-block"></span>
+                    </div>
+                    <div class="col-sm-2 col-md-2">
+                   	     <label>
+                        	制单人：
+                        </label>
+                        <select id="lister" name="lister" class="form-control" type="text">
+                        	<option value="0">全部</option>
+                            #foreach($employee in $tEmployees)
+                                <option value="$employee.id">$employee.name</option>
+                            #end
+                        </select>
+                        <span class="help-block"></span>
+                    </div>
+                    <div class=" col-sm-2 col-md-2">
+                    	<label>&nbsp;</label>
+                   	    <button class="btn btn-primary" type="submit" id="search">搜索</button>
+                    </div>
+                </div>
+                <div class="row">
+                   <div class="col-sm-2 col-md-2">
+                   	     <label>
+                        	制单日期:
+                        </label>
+                        <input id="createdDateStart" name="createdDateStart" class="form-control datetimepicker" >
+                    </div>
+                    <div class="col-sm-2 col-md-2">
+                   	    <label>
+                        	业务日期：：
+                        </label>
+                        <input id="businessDateStart" name="businessDateStart" class="form-control datetimepicker" >
+                    </div>
+                </div>
+            
+	            #**
+	            <div class="form-actions">
+	                <button class="btn btn-primary" type="submit">搜索</button>
+	            </div>
+	            *#
+	        </form>
+    	</div>
+        <table class="table table-bordered table-striped table_vam table-responsive" id="dt_gal">
+            <thead>
+	            <tr>
+	                <th class="table_checkbox">
+	                    <input name="select_rows" class="select_rows" data-tableid="dt_gal" type="checkbox"/>
+	                </th>
+	                <th>序号</th>
+	                <th>业务日期</th>
+	                <th>单据编号</th>
+	                <th>账目类型</th>
+	                <th>金额(元)</th>
+	                <th>门店</th>
+	                <th>备注</th>
+	                <th style="width:200px">操作</th>
+	            </tr>
+            </thead>
+            <tbody>
+                #if($!tExpenses && $!tExpenses.size()>0)
+                    #foreach($this in $tExpenses)
+                    <tr>
+                        <td>
+                            <input name="row_sel" class="select_row" type="checkbox" value="$!this.id" />
+                        </td>
+                        <th>$!this.id</th>
+		                <th>$!dateFormatUtils.format($!this.businessDate,"yyyy-MM-dd HH:mm")</th>
+		                <th>$!this.serialNumber</th>
+                        #if ($!this.type == 1)
+                            <th>销售费用</th>
+                        #elseif ($!this.type == 2)
+                            <th>管理费用</th>
+                        #else
+                            <th>其他费用</th>
+                        #end
+		                <th>$!autoStringUtil.getYuan($!this.amount)</th>
+                        <th>$!this.tStore.name</th>
+                        <th>$!this.remark</th>
+                        <td>
+                        	<a  href="/financial/cost/update.html?id=$!this.id" data-delid="$!this.id"
+                               class="update_rows" title="">
+                            	<span class="glyphicon glyphicon-pencil"></span>修改
+                            </a>
+                            <a href="#" class="delete_rows" data-delid="$!this.id" title="">
+                                <span class="glyphicon glyphicon-trash"></span>删除
+                            </a>
+                        </td>
+                    </tr>
+                    #end
+                #end
+            </tbody>
+        </table>
+    </div>
+</div>
+
+#define($scriptHtml)
+
+<script src="$!homeModule.getTarget("main/business/financial/cost-list.js")" />
+
+#end

@@ -1,0 +1,96 @@
+
+#set($menuParent = "setting")
+#set($menu = "setting_commodity_list")
+
+#define($cssHtml)
+
+<style type="text/css">
+
+.form-input {
+	width: 160px;
+	display: inline-block;
+}
+
+</style>
+
+#end
+
+<div id="jCrumbs" class="breadCrumb module">
+    <ul>
+        <li>
+            <a href="#">
+                <i class="glyphicon glyphicon-home"></i>
+            </a>
+        </li>
+        <li>
+            <a href="#">设置</a>
+        </li>
+        <li>商品</li>
+    </ul>
+</div>
+<div class="row">
+    <div class="col-sm-12 col-md-12">
+		<div class="row formSep">
+			<div class="col-sm-4 col-md-4">
+				<a href="$homeModule.getTarget("setting/commodity/add.html")" class="btn btn-primary">新增商品</a>
+			</div>
+			<div class="col-sm-offset-4  col-sm-4  col-md-offset-4 col-md-4">
+				<a href="$homeModule.getTarget("setting/commodity/listExcel.html")" class="btn btn-success pull-right">导出Execl</a>
+			</div>
+		</div>
+		<div style="padding:5px;"></div>
+        <table class="table table-bordered table-striped table_vam table-responsive" id="dt_gal">
+            <thead>
+	            <tr>
+	                <th class="table_checkbox">
+	                    <input name="select_rows" class="select_rows" data-tableid="dt_gal" type="checkbox"/>
+	                </th>
+	                <th>序号</th>
+	                <th>编号</th>
+	                <th>名称</th>
+	                <th>规格</th>
+	                <th>属性</th>
+	                <th>序号状态</th>
+	                <th>基本单位</th>
+	                <th>零售价（元）</th>
+	                <th>操作</th>
+	            </tr>
+            </thead>
+            <tbody>
+                #if($!commodityList && $!commodityList.size()>0)
+                    #foreach($this in $commodityList)
+                    <tr id="$!this.id">
+                        <td>
+                            <input name="row_sel" class="select_row" type="checkbox" value="$!this.id" />
+                        </td>
+                        <th>$!this.id</th>
+		                <th>$!this.serailNumber</th>
+		                <th>$!this.name</th>
+		                <th>$!this.specification</th>
+		                <th>$!this.remark</th>
+		                <th>#if($!this.state==0) 启用  #else 停用 #end</th>
+		                <th>$!this.unit</th>
+		                <th>$!autoStringUtil.getYuan($!this.retailPrice)</th>
+                        <td>
+                        	#**
+                        	<a href="$homeModule.getTarget("setting/alarmGroup_toAlarmGroupEdit.action").addQueryData("id","$!this.id")" class="sepV_a" title="">
+                            	<span class="glyphicon glyphicon-pencil"></span>修改
+                            </a>
+                            *#
+                            <a href="#" class="delete_rows" data-delid="$!this.id" title="">
+                                <span class="glyphicon glyphicon-trash"></span>删除
+                            </a>
+                        </td>
+                    </tr>
+                    #end
+                #end
+            </tbody>
+        </table>
+    </div>
+</div>
+
+#define($scriptHtml)
+
+<script src="$!homeModule.getTarget("main/business/setting/commodity-list.js")" />
+
+#end

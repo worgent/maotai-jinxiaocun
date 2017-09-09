@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:task="http://www.springframework.org/schema/task" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+     http://www.springframework.org/schema/task
+     http://www.springframework.org/schema/task/spring-task-4.0.xsd"
+	default-autowire="byName">
+	<context:component-scan base-package="com.sohu.service.login"/>
+	<context:component-scan base-package="com.sohu.service.jinxiaocun"/>
+
+	<!-- 任务相关 -->
+	<!--<bean id="loginService" class="com.sohu.service.login.impl.LoginServiceImpl"></bean>-->
+	<!--<bean id="tLoginService" class="com.sohu.service.system.impl.TLoginServiceImpl"></bean>-->
+	
+	<bean id="excelUtil" class="com.sohu.mrd.domain.util.ExcelUtil" ></bean>
+    <!-- excel模板工具类的地址 -->
+    <bean id="excelTemplateMap" class="java.util.HashMap">
+        <constructor-arg>
+            <map>
+                <entry key="TEMPLATE_PATH" value="/templates/" />
+            </map>
+        </constructor-arg>
+    </bean>
+	
+</beans>

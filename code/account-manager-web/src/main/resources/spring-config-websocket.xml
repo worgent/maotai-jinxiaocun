@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:websocket="http://www.springframework.org/schema/websocket"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/websocket
+        http://www.springframework.org/schema/websocket/spring-websocket.xsd"
+        default-autowire="byName" >
+
+<!-- 	<bean id="myHandler" class="com.sohu.service.websocket.handler.MyHandler" />
+	
+	<websocket:handlers>
+		<websocket:mapping handler="myHandler" path="/websocket.mvc" />
+	</websocket:handlers> -->
+		
+	<bean id="telWebSocketHandler" class="com.sohu.service.websocket.handler.TelWebSocketHandler"/>
+	
+	<websocket:handlers allowed-origins="*">
+	    <websocket:mapping path="/websocket.mvc" handler="telWebSocketHandler"/>
+	    <websocket:handshake-interceptors>
+	        <bean class="com.sohu.service.websocket.interceptor.TelWebSocketHandshakeInterceptor"/>
+	    </websocket:handshake-interceptors>
+	</websocket:handlers>
+	
+	<bean class="org.springframework.web.socket.server.standard.ServletServerContainerFactoryBean">
+	    <property name="maxTextMessageBufferSize" value="2048000"/>
+	    <property name="maxBinaryMessageBufferSize" value="2048000"/>
+	    <property name="maxSessionIdleTimeout" value="18000000"/>
+	    <property name="asyncSendTimeout" value="180000"/>
+	</bean>
+	
+</beans>

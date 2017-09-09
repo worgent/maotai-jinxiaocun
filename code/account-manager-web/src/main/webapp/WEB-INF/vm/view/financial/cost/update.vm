@@ -1,0 +1,99 @@
+
+#set($menuParent = "financial")
+#set($menu = "financial_cost_update")
+
+#set($script = "alarmGroup_toAlarmGroupAdd")
+<div id="jCrumbs" class="breadCrumb module">
+    <div style="overflow:hidden; position:relative; width: 1299px;"><div><ul style="width: 5006px;">
+        <li class="first">
+            <a href="#">
+                <i class="glyphicon glyphicon-home"></i>
+            </a>
+        </li>
+        <li>
+            <a href="#">财务管理</a>
+        </li>
+        <li>
+            <a href="#">支出列表</a>
+        </li>
+        <li class="last">修改支出</li>
+    </ul></div></div>
+</div>
+<div class="container">
+<div class="row">
+    <div class="col-sm-offset-3 col-sm-6 col-md-offset-3 col-md-6">
+		<form class="form-horizontal">
+    		<h3 class="heading">基本信息</h3>
+			<fieldset>
+                <div class="form-group hidden">
+                    <label for="id" class="control-label col-sm-2">ID</label>
+                    <div class="col-sm-8">
+                        <input id="id" class="input-xlarge form-control" value="$!tExpense.id" disabled type="text">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="serailNumber" class="control-label col-sm-2">单据编号</label>
+                    <div class="col-sm-8">
+                        <input id="serailNumber" class="input-xlarge form-control" value="$!tExpense.serialNumber" disabled type="text">
+                    </div>
+                </div>
+				<div class="form-group">
+					<label for="business_date" class="control-label col-sm-2">业务日期</label>
+					<div class="col-sm-8">
+						<input id="business_date" class="input-xlarge form-control datetimepicker"
+							   value="$!dateFormatUtils.format($!tExpense.businessDate,"yyyy-MM-dd HH:mm")" type="text">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="type" class="control-label col-sm-2">账目类型</label>
+                    <div class="col-sm-8">
+                        <select id="type" class="input-xlarge form-control" value="$tExpense.type" type="text">
+                            <option value="0" #if(0 == $tExpense.type) selected#end>全部</option>
+                            <option value="1" #if(1 == $tExpense.type) selected#end>销售费用</option>
+                            <option value="2" #if(2 == $tExpense.type) selected#end>管理费用</option>
+                        </select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="amount" class="control-label col-sm-2">金额(元))</label>
+					<div class="col-sm-8">
+						<input id="amount" class="input-xlarge form-control"
+		value="$!autoStringUtil.getYuan($tExpense.amount)" type="text">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="handler" class="control-label col-sm-2">经手人</label>
+					<div class="col-sm-8">
+						<select id="handler" class="input-xlarge form-control" value="$tExpense.handler" type="text">
+							#foreach($employee in $tEmployees)
+                                <option value="$employee.id"
+									#if($employee.id == $tExpense.handler) selected#end
+										>$employee.name</option>
+							#end
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="remark" class="control-label col-sm-2">备注</label>
+					<div class="col-sm-8">
+						<textarea class="form-control" id="remark" >$tExpense.remark</textarea>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<div class="col-sm-8 col-sm-offset-2">
+						<button class="btn btn-default" type="button" id="btnSave">保存 </button>
+						##<button class="btn btn-link">Cancel</button>
+					</div>
+				</div>
+			</fieldset>
+		</form>
+    </div>
+</div>
+</div>
+
+#define($scriptHtml)
+
+<script src="$!homeModule.getTarget("main/business/financial/cost-update.js")" />
+
+#end

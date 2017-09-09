@@ -1,0 +1,189 @@
+@charset "utf-8";
+.img {
+  text-align: center; 
+}
+.img img {
+  width: 100%;
+}
+.login-wrap {
+  margin-top: 35px;
+  font-size: 16px;
+  color: #0d91ce;
+}
+.login-wrap form {
+  padding: 30px 50px;
+  -webkit-box-shadow: 1px 2px 6px;  
+  -moz-box-shadow: 1px 2px 6px;  
+  box-shadow: 1px 2px 6px;  
+}
+.login-wrap .form-control {
+  border-color: #409cd6;
+/*   padding: 22px 15px; */
+  border-radius: 0;
+}
+
+.login-wrap .btn-wrap {
+	margin-top: 50px;
+	margin-bottom: 30px;
+}
+.login-wrap .btn-wrap button,
+.login-wrap .btn-wrap a {
+  font-size: 14px;
+  margin-right: 6px;
+}
+.login-wrap .btn-wrap .btn:active {
+  box-shadow: none;
+}  
+.login-wrap .btn-wrap button {
+  background: #004775;
+  color: #fff;
+  width: 130px;
+  border-radius: 0;
+  padding: 10px 12px;
+}
+.login-wrap label {
+  margin-bottom: 15px;
+}
+.login-wrap .form-group {
+  margin-bottom: 30px;
+}
+.login-wrap .nav-tabs {
+  padding-left: 35px;
+  border: none;
+}
+.login-wrap .tab-content {
+  border: 1px solid #409cd6;
+  border-radius: 3px;
+}
+.login-wrap .nav-tabs>li.active>a, 
+.login-wrap .nav-tabs>li.active>a:focus, 
+.login-wrap .nav-tabs>li.active>a:hover {
+  border-left-color: #409cd6;
+  border-right-color: #409cd6;
+  border-top-color: #409cd6;
+  border-bottom-color: #fff;
+  color: #1463c2;
+  font-weight: bold;
+  font-size: 20px;
+}
+.login-wrap .nav-tabs>li>a,
+.login-wrap .nav-tabs>li>a:focus {
+  font-size: 20px;
+}
+.login-wrap .nav-tabs>li>a:hover {  
+  color: #0d51ce;
+  border-bottom-color: #409cd6;
+}
+.nav>li>a:focus, .nav>li>a:hover{
+	background:#ffffff;
+}
+.nav-tabs>li>a{
+	border:none;
+}
+
+
+/*修改登录界面样式*/
+body{
+	background:url(/libs/images/loginbg.png) no-repeat center 50px;
+	width:100%;
+	height:100%;
+	padding:0px;
+	margin:0px;
+}
+a{
+	color: #fff;
+}
+.navbar{
+	margin-bottom: 0;
+}
+
+.login-wrap {
+  font-size: 16px;
+  color: #ffffff;
+  width:400px;
+  height: 500px;
+  position: absolute;
+  left: 50%;
+  margin-left: 100px;
+}
+.login-wrap form {
+  padding: 30px 50px;
+  -webkit-box-shadow: 1px 1px 2px;  
+  -moz-box-shadow: 1px 1px 2px;  
+  box-shadow: 1px 1px 2px;  
+}
+.login-wrap .form-control {
+  border-color: #ffffff;
+/*   padding: 22px 15px; */
+  border-radius: 3px;
+  
+}
+
+.login-wrap .btn-wrap {
+	margin-top: 40px;
+	margin-bottom: 10px;
+}
+.login-wrap .btn-wrap button,
+.login-wrap .btn-wrap a {
+  font-size: 14px;
+  margin-right: 6px;
+}
+.login-wrap .btn-wrap .btn:active {
+  box-shadow: none;
+}  
+.login-wrap .btn-wrap button {
+  background: #fb965a;
+  color: #fff;
+  width: 130px;
+  border-radius: 3px;
+  padding: 10px 12px;
+  border: 1px solid #fff;
+}
+.login-wrap label {
+  margin-bottom: 10px;
+}
+.login-wrap .form-group {
+  margin-bottom: 30px;
+}
+.login-wrap .nav-tabs {
+  padding-left: 35px;
+  border: none;
+}
+.login-wrap .tab-content {
+  border: 1px solid #ffffff;
+  border-radius: 3px;
+}
+.login-wrap .nav-tabs>li.active>a, 
+.login-wrap .nav-tabs>li.active>a:focus, 
+.login-wrap .nav-tabs>li.active>a:hover {
+  border-left-color: #fff;
+  border-right-color: #fff;
+  border-top-color: #fff;
+  border-bottom-color: #44afff;
+  border-bottom-color: #0c508d;
+  color: #fff;
+  font-weight: bold;
+  font-size: 20px;
+  background: rgba(0,0,0,0);
+}
+.login-wrap .nav-tabs>li>a,
+.login-wrap .nav-tabs>li>a:focus {
+  font-size: 20px;
+}
+.login-wrap .nav-tabs>li>a:hover {  
+  color: #fff;
+  border-bottom-color: #fff;
+  background: rgba(0,0,0,0);
+}
+.nav>li>a:focus, .nav>li>a:hover{
+	background:#ffffff;
+}
+.nav-tabs>li>a{
+	border:none;
+}
+.form-control{
+	height:42px;
+	background:rgba(255,255,255,0);
+	color:#fff;
+}
+

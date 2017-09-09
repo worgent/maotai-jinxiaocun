@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:cache="http://www.springframework.org/schema/cache"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/cache
+     	http://www.springframework.org/schema/cache/spring-cache.xsd
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-4.0.xsd"
+    default-autowire="byName">
+    
+	<cache:advice id="cacheAdvice" cache-manager="cacheManager">
+	   <cache:caching cache="general">
+	      <cache:cacheable method="queryAppUserOneYearChart" key="#root.methodName"/>
+	      <cache:cacheable method="queryAppUserDistributionChart" key="#root.methodName"/>
+	      <cache:cacheable method="queryAppUserChannelChart" key="#root.methodName"/>
+	      <cache:cache-evict method="clearGeneralCacheAll" all-entries="true"/>
+	      <!-- <cache:cacheable method="findById" key="#p0"/>
+	      <cache:cacheable method="find" key="#user.id"/>
+	      <cache:cache-evict method="deleteAll" all-entries="true"/> -->
+	   </cache:caching>
+	</cache:advice>
+   
+	<aop:config proxy-target-class="false">
+      <aop:advisor advice-ref="cacheAdvice" pointcut="execution(* com.sohu.service.analysis.AppAnalysisStatisticsService.*(..))"/>
+	</aop:config>
+	
+	<!-- Ehcache实现 -->
+
+	<bean id="cacheManagerFactory" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">  
+        <property name="configLocation" value="classpath:ehcache.xml" />  
+    </bean>  
+      
+    <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">      
+     	<property name="cacheManager"  ref="cacheManagerFactory"/>      
+    </bean>    
+
+</beans>

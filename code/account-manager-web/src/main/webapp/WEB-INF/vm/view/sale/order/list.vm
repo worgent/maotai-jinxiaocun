@@ -1,0 +1,170 @@
+
+#set($menuParent = "sale")
+#set($menu = "sale_order")
+
+<div id="jCrumbs" class="breadCrumb module">
+    <ul>
+        <li>
+            <a href="#">
+                <i class="glyphicon glyphicon-home"></i>
+            </a>
+        </li>
+        <li>
+            <a href="#">销售管理</a>
+        </li>
+        <li>订单</li>
+    </ul>
+</div>
+<div class="row">
+    <div class="col-sm-12 col-md-12">
+    	<div class="well">
+    		<div class="formSep">
+    			<div class="btn-group">
+    				<a href="/sale/order/add.html" class="btn btn-success">新建销售订单</a>
+					<a href="#" class="btn btn-default">导出execl</a>
+    			</div>
+    		</div>
+	    	<form class="form_validation_ttip" method="post" action="/sale/order/list.html" novalidate="novalidate">
+	            
+                <div class="row">
+                    <div class="col-sm-2 col-md-2">
+                   	     <label>
+                        	单据编号：
+                        </label>
+                        <input id="serailNumber" name="serailNumber" class="form-control" type="text">
+                        <span class="help-block"></span>
+                    </div>
+                    <div class="col-sm-2 col-md-2">
+                   	     <label>
+                        	客户名称：
+                        </label>
+##                        <input id="customerId" name="customerId" class="form-control" type="text">
+                        <select id="customerId" name="customerId" class="input-xlarge form-control" value="" type="text">
+                            <option value="0">全部</option>
+                            #foreach($customer in $tCustomers)
+                                <option value="$customer.id">$customer.name</option>
+                            #end
+                        </select>
+                        <span class="help-block"></span>
+                    </div>
+                    <div class="col-sm-2 col-md-2">
+                   	     <label>
+                        	门店：
+                        </label>
+                        <select id="storeId" name="storeId" class="form-control" >
+                            <option value="0">全部</option>
+                            #foreach($store in $tStores)
+                                <option value="$store.id">$store.name</option>
+                            #end
+                        </select>
+                    </div>
+                    <div class=" col-sm-2 col-md-2">
+                    	<label>&nbsp;</label>
+                   	    <button class="btn btn-primary" type="submit">搜索</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2 col-md-2">
+                   	     <label>
+                        	业务日期：<span class="f_req">*</span>
+                        </label>
+                        <input id="datetime1" name="alarmGroup.name" class="datetimepicker form-control" type="text">
+                        <span class="help-block"></span>
+                    </div>
+                     <div class="col-sm-2 col-md-2">
+                   	     <label>
+                        	制单日期：<span class="f_req">*</span>
+                        </label>
+                        <input id="businessDateStart" name="businessDateStart" class="datetimepicker form-control" type="text">
+                        <span class="help-block"></span>
+                    </div>
+                    <div class="col-sm-2 col-md-2">
+                   	     <label>
+                        	经手人：
+                        </label>
+                        <select id="handlerId" name="handlerId" class="form-control" >
+                            <option value="0">全部</option>
+                            #foreach($employee in $tEmployees)
+                                <option value="$employee.id">$employee.name</option>
+                            #end
+                        </select>
+                    </div>
+                    <div class="col-sm-2 col-md-2">
+                   	     <label>
+                        	制单人：
+                        </label>
+                        <select id="listerId" name="listerId" class="form-control" >
+                            <option value="0">全部</option>
+                            #foreach($employee in $tEmployees)
+                                <option value="$employee.id">$employee.name</option>
+                            #end
+                        </select>
+                    </div>
+                </div>
+            
+	            #**
+	            <div class="form-actions">
+	                <button class="btn btn-primary" type="submit">搜索</button>
+	            </div>
+	            *#
+	        </form>
+    	</div>
+        <table class="table table-bordered table-striped table_vam table-responsive" id="dt_gal">
+            <thead>
+	            <tr>
+	                <th class="table_checkbox">
+	                    <input name="select_rows" class="select_rows" data-tableid="dt_gal" type="checkbox"/>
+	                </th>
+	                <th>序号</th>
+	                <th>业务日期</th>
+	                <th>单据编号</th>
+	                <th>客户名称</th>
+	                <th>销售订单商品</th>
+	                <th>销售订单数量</th>
+	                <th>待收款（元）</th>
+	                <th>总计金额（元）</th>
+	                <th>门店</th>
+	                <th style="width:200px">操作</th>
+	            </tr>
+            </thead>
+            <tbody>
+                #if($!tOrders && $!tOrders.size()>0)
+                    #foreach($this in $tOrders)
+                    <tr>
+                        <td>
+                            <input name="row_sel" class="select_row" type="checkbox" value="$!this.id" />
+                        </td>
+                        <th>$!this.id</th>
+		                <th>$!dateFormatUtils.format($!this.businessDate,"yyyy-MM-dd HH:mm:ss")</th>
+		                <th>$!this.serialNumber</th>
+		                <th>$!this.customerName</th>
+                        <th>$!this.memo</th>
+                        <th>$!this.memo</th>
+                        #set($debet=$!{this.finalAmount} - $!{this.actualPayment})
+                        <th>$!autoStringUtil.getYuan($!debet)</th>
+                        <th>$!autoStringUtil.getYuan($!this.finalAmount)</th>
+                        <th>$!this.tStore.name</th>
+                        <td>
+##                        	<a href="$homeModule.getTarget("setting/alarmGroup_toAlarmGroupEdit.action").addQueryData("id","$!this.id")" class="sepV_a" title="">
+##                            	<span class="glyphicon glyphicon-pencil"></span>修改
+##                            </a>
+                            <a href="$homeModule.getTarget("sale/order/detail.html?id=$!this.id")" title="">
+                                <span class="glyphicon glyphicon-trash"></span>详情
+                            </a>
+                            <a href="#" class="delete_rows" data-delid="$!this.id" title="">
+                                <span class="glyphicon glyphicon-trash"></span>删除
+                            </a>
+                        </td>
+                    </tr>
+                    #end
+                #end
+            </tbody>
+        </table>
+    </div>
+</div>
+
+#define($scriptHtml)
+
+<script src="$!homeModule.getTarget("main/business/sale/order-list.js")" />
+
+#end

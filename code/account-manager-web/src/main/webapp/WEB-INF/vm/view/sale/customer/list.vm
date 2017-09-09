@@ -1,0 +1,154 @@
+
+#set($menuParent = "sale")
+#set($menu = "sale_customer")
+
+<div id="jCrumbs" class="breadCrumb module">
+    <ul>
+        <li>
+            <a href="#">
+                <i class="glyphicon glyphicon-home"></i>
+            </a>
+        </li>
+        <li>
+            <a href="#">销售管理</a>
+        </li>
+        <li>客户</li>
+    </ul>
+</div>
+<div class="row">
+    <div class="col-sm-12 col-md-12">
+		<div class="formSep">
+			<div class="btn-group">
+				<a href="$homeModule.getTarget("sale/customer/add.html")" class="btn btn-primary">新建客户</a>
+				<a href="$homeModule.getTarget("sale/customer/listExcel.html")" class="btn btn-success">导出execl</a>
+			</div>
+		</div>
+    	<div class="well">
+	    	<form class="" method="post" action="$homeModule.getTarget("sale/customer/list.html")" novalidate="novalidate">
+	            
+                <div class="row">
+                    <div class="col-sm-2 col-md-2">
+                   	     <label>
+                        	编号：
+                        </label>
+                        <input id="" name="serialNumber" value="$!serialNumber" class="form-control" type="text">
+                        <span class="help-block"></span>
+                    </div>
+                    <div class="col-sm-2 col-md-2">
+                   	     <label>
+                        	名称：
+                        </label>
+                        <input id="" name="name" value="$!name" class="form-control" type="text">
+                        <span class="help-block"></span>
+                    </div>
+                    <div class="col-sm-2 col-md-2">
+                   	     <label>
+                        	联系电话：
+                        </label>
+                        <input id="" name="contactPhone" value="$!contactPhone" class="form-control" type="text">
+                        <span class="help-block"></span>
+                    </div>
+ 					<div class="col-sm-2 col-md-2">
+                   	     <label>
+                        	联系人:：
+                        </label>
+                        <input id="" name="contact" value="$!contact" class="form-control" type="text">
+                    </div>
+                    <div class="col-sm-2 col-md-2">
+                   	    <label>
+                        	共享状态：：
+                        </label>
+                        <select id="name" name="state" class="form-control" type="text">
+                        	<option value="" #if($!state == 0) selected #end>全部</option>
+                        </select>
+                        <span class="help-block"></span>
+                    </div>
+                    <div class=" col-sm-2 col-md-2">
+                    	<label>&nbsp;</label>
+                   	    <button class="btn btn-primary" type="submit">搜索</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2 col-md-2">
+                   	     <label>
+                        	备注：
+                        </label>
+                        <input id="datetime1" name="remark" class="form-control" type="text">
+                        <span class="help-block"></span>
+                    </div>
+                     <div class="col-sm-2 col-md-2">
+                   	     <label>
+                        	门店：：
+                        </label>
+                        <select id="datetime2" name="storeId" class="form-control" type="text">
+                        	<option value="" #if($!state == 0) selected #end>全部</option>
+                        </select>
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+            
+	            #**
+	            <div class="form-actions">
+	                <button class="btn btn-primary" type="submit">搜索</button>
+	            </div>
+	            *#
+	        </form>
+    	</div>
+        <table class="table table-bordered table-striped table_vam table-responsive" id="dt_gal">
+            <thead>
+	            <tr>
+	                <th class="table_checkbox">
+	                    <input name="select_rows" class="select_rows" data-tableid="dt_gal" type="checkbox"/>
+	                </th>
+	                <th>序号</th>
+	                <th>编号</th>
+	                <th>名称</th>
+##	                <th>应收欠款</th>
+	                <th>单位电话</th>
+	                <th>联系人</th>
+	                <th>联系电话</th>
+	                <th>门店</th>
+	                <th>操作</th>
+	            </tr>
+            </thead>
+            <tbody>
+                #if($!customer && $!customer.size()>0)
+                    #foreach($this in $customer)
+                    <tr id="$!this.id">
+                        <td>
+                            <input name="row_sel" class="select_row" type="checkbox" value="$!this.id" />
+                        </td>
+                        <th>$!this.id</th>
+		                <th>$!this.serailNumber</th>
+		                <th>$!this.name</th>
+##		                <th>$!this.initDebt</th>
+		                <th>$!this.officePhone</th>
+		                <th>$!this.contact</th>
+		                <th>$!this.contactPhone</th>
+		                <th>$!this.storeId</th>
+                        <td>
+                        	#**
+                        	<a href="$homeModule.getTarget("setting/alarmGroup_toAlarmGroupEdit.action").addQueryData("id","$!this.id")" class="sepV_a" title="">
+                            	<span class="glyphicon glyphicon-pencil"></span>修改
+                            </a>
+                            *#
+                            <a href="/customer/detail.html?type=1&id=$!this.id" title="">
+                                <span class="glyphicon glyphicon-trash"></span>详情
+                            </a>
+                            <a href="#" class="delete_rows" data-delid="$!this.id" title="">
+                                <span class="glyphicon glyphicon-trash"></span>删除
+                            </a>
+                        </td>
+                    </tr>
+                    #end
+                #end
+            </tbody>
+        </table>
+    </div>
+</div>
+
+#define($scriptHtml)
+
+<script src="$!homeModule.getTarget("main/business/sale/customer-list.js")" />
+
+#end

@@ -1,0 +1,84 @@
+#* @vtlvariable name="error" type="java.lang.String" *#
+#* @vtlvariable name="exception" type="java.lang.Exception" *#
+#set($layout="/WEB-INF/vm/layout/login.vm")
+<html lang="zh-cn">
+<head>
+    <title>搜狐--您的访问的页面暂时无法访问，请稍后再试</title>
+
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="This is my page">
+    <!--
+     <link rel="stylesheet" type="text/css" href="styles.css">
+     -->
+
+
+    <script type="text/javascript">
+        if (window != top) {
+            window.top.location.href = "/index.action";
+        }
+
+        function out(obj) {
+            var i = obj;
+            if (i == 0)
+                window.location.href = "/index.action";
+            var message = document.getElementById("time");
+            message.innerHTML = i;
+            i--;
+            if (i >= 0) {
+                setTimeout("out(" + i + ")", 1000);
+            }
+        }
+    </script>
+
+</head>
+
+<body onload="out(5)">
+<br/><br/>
+<table>
+    <tr>
+        <td width="350"></td>
+        <td>
+            <img
+                    src="$homeModule.getTarget("/errorpage/images/head.jpg")"/>
+        </td>
+    </tr>
+</table>
+<center>
+
+    <h3>$!login_error <a href="javascript:history.go(-1) ">返回&gt;&gt;</a>&nbsp;&nbsp;</h3>
+    <table align="center">
+        <tr>
+            <td><h3>您访问的页面，需要登录 ,请稍后先登录 。</h3></td>
+        </tr>
+        <tr>
+            <td>
+                <h3> 如果遇登录问题，请与 Web服务器的管理员联系。</h3>
+            </td>
+        </tr>
+    </table>
+
+    <h3>
+        <span id="time" style="color:red;"> </span>秒后自动跳转，如不跳转，请点击此连接<h3><a href="/index.action">
+        登录页面
+    </a></h3>
+    </h3>
+</center>
+<br>
+<table>
+    <tr>
+        <td width="500"></td>
+        <td></td>
+        <td>
+            <img
+                    src="$homeModule.getTarget("/errorpage/images/403.jpg")"/>
+        </td>  <td>
+        <img
+                src="$homeModule.getTarget("/errorpage/images/500.jpg")"/>
+    </td>
+    </tr>
+</table>
+</body>
+</html>

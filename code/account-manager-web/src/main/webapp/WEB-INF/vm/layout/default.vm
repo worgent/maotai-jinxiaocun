@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+#parse("/WEB-INF/vm/common/head.vm")
+<body class="full_width">
+###parse("/WEB-INF/vm/common/head_swith.vm")
+<div id="maincontainer" class="clearfix">
+ #parse("/WEB-INF/vm/common/body_top.vm")
+ <div id="contentwrapper">
+     <div class="main_content">
+         $screen_content
+     </div>
+ </div>
+ 
+ #parse("/WEB-INF/vm/common/body_left.vm")
+
+</div>
+ #parse("/WEB-INF/vm/common/bottom.vm")
+
+ </body>
+</html>
+
+ 

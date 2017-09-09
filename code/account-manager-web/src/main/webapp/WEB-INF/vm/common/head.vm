@@ -1,0 +1,76 @@
+##<head>
+##    <title>#if($title)$title#else 无标题 #end</title>
+##    <link rel="stylesheet" type="text/css" href="$homeModule.getTarget("misc/css/erpbase.css")" media="all"/>
+##    <script type="text/javascript" src="$homeModule.getTarget("misc/js/jquery-1.4.2.min.js")"></script>
+##    <script type="text/javascript" src="$homeModule.getTarget("misc/js/pop.base.js")"></script>
+##
+##</head>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>进销存</title>
+
+    <!-- Bootstrap framework -->
+    <link href="$homeModule.getTarget("main/css/bootstrap.min.css")" rel="stylesheet">
+    <!-- Bootstrap datetimepicer -->
+    <link href="$homeModule.getTarget("main/css/bootstrap-datetimepicker.min.css")" rel="stylesheet">
+    <!-- jQuery UI theme -->
+    <link href="$homeModule.getTarget("main/css/Aristo.css")" rel="stylesheet">
+    <!-- tooltips-->
+    <link href="$homeModule.getTarget("main/css/BreadCrumb.css")" rel="stylesheet">
+    <!-- tooltips-->
+    <link href="$homeModule.getTarget("main/css/jquery.qtip.min.css")" rel="stylesheet">
+    <!-- colorbox -->
+    <link href="$homeModule.getTarget("main/css/colorbox.css")" rel="stylesheet">
+    <!-- code prettify -->
+    <link href="$homeModule.getTarget("main/css/prettify.css")" rel="stylesheet">
+    <!-- sticky notifications -->
+    <link href="$homeModule.getTarget("main/css/sticky.css")" rel="stylesheet">
+    <!-- aditional icons -->
+    <link href="$homeModule.getTarget("main/css/splashy.css")" rel="stylesheet">
+    <!-- flags -->
+    <link href="$homeModule.getTarget("main/css/flags.css")" rel="stylesheet">
+    <!-- datatables -->
+    <link href="$homeModule.getTarget("main/css/TableTools.css")" rel="stylesheet">
+
+    <!-- calendar -->
+    <link href="$homeModule.getTarget("main/css/fullcalendar_gebo.css")" rel="stylesheet">
+
+    <!-- main styles -->
+    <link href="$homeModule.getTarget("main/css/style.css")" rel="stylesheet">
+    <!-- theme color-->
+    <link id="link_theme" href="$homeModule.getTarget("main/css/skin/blue.css")" rel="stylesheet">
+
+  #*  <link type="text/css" rel="stylesheet" href="main/css?family=PT+Sans">*#
+
+    <!-- uniform -->
+	<link rel="stylesheet" href="$homeModule.getTarget("main/css/uniform.aristo.css")" />
+	
+	<!-- multiselect -->
+    <link rel="stylesheet" href="$homeModule.getTarget("main/css/multi-select.css")" />
+    
+    <!-- enhanced select -->
+	<link rel="stylesheet" href="$homeModule.getTarget("main/css/chosen.css")" />
+
+    <!-- favicon -->
+    <link href="$homeModule.getTarget("images/icon/favicon.ico")" rel="shortcut icon">
+
+	<style type="text/css">
+		.ssw_trigger {
+			display: none;
+		}
+	</style>
+
+	$!{cssHtml}
+	
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="$homeModule.getTarget("css/ie/ie.css")" />
+    <![endif]-->
+
+    <!--[if lt IE 9]>
+    <script src="$homeModule.getTarget("js/ie/html5.js")"></script>
+    <script src="$homeModule.getTarget("js/ie/respond.min.js")"></script>
+    <script src="$homeModule.getTarget("js/ie/excanvas.min.js")"></script>
+    <![endif]-->
+    
+</head>

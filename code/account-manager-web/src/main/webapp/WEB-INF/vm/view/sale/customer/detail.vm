@@ -1,0 +1,178 @@
+
+#set($menuParent = "sale")
+#set($menu = "sale_customer_detail")
+
+#define($cssHtml)
+
+<style type="text/css">
+
+.form-input {
+	width: 160px;
+	display: inline-block;
+}
+
+</style>
+
+#end
+
+<div id="jCrumbs" class="breadCrumb module">
+    <ul>
+        <li>
+            <a href="#">
+                <i class="glyphicon glyphicon-home"></i>
+            </a>
+        </li>
+        <li>
+            <a href="#">销售管理</a>
+        </li>
+        <li>
+            <a href="#">客户</a>
+        </li>
+        <li>客户订单详情</li>
+    </ul>
+</div>
+<div class="row">
+    <div class="col-sm-12 col-md-12">
+		<div class="tabbable tabbable-bordered">
+			
+			<ul class="nav nav-tabs">
+				<li class="active"><a href="#tab_br1" data-toggle="tab">$!customer.name</a></li>
+			</ul>
+##			<div class="tab-content">
+##				<div class="tab-pane active" id="tab_br1">
+##					<div class="row">
+##						<div class="col-sm-4 col-md-4">
+##							<h3>应收账款(元)：$!autoStringUtil.getYuan($!allDebt)</h3>
+##						</div>
+##						<div class="col-sm-offset-2  col-sm-4  col-md-offset-2 col-md-4">
+####							<form action="$homeModule.getTarget("sale/customer/detail.html")" method="post">
+####								<input type="hidden" name="id" value="$!id" />
+####								<button class="btn btn-default pull-right">搜索</button>
+####		                    	<input id="serialNumber" name="serialNumber" value="$!serialNumber" class="form-control form-input pull-right" type="text" placeholder="搜索编号">
+####		                    </form>
+##		    			</div>
+##		    			<div class="col-sm-2 col-md-2">
+####		    				<form id="excel_form" name="ExcelForm" action="$homeModule.getTarget("sale/customer/detailExcel.html")">
+####		    					<input name="serialNumber" value="$!serialNumber" type="hidden">
+####		    					<input name="id" value="$!id" type="hidden">
+####		    				</form>
+####		    				<button id="excel" class="btn btn-success pull-right">导出Excel</button>
+##		    			</div>
+##					</div>
+##				</div>
+##			</div>
+		</div>
+        <div class="well">
+
+            <div class="row">
+
+                <div class="col-sm-2 col-md-2 well-section" >
+                    <div>应收欠款(元)</div>
+                    <div class="pd">$!autoStringUtil.getYuan($allDebt)</div>
+                </div>
+                <div class="col-sm-1 col-md-1 well-section">=
+                </div>
+                <div class="col-sm-2 col-md-2 well-section">期初欠款
+                    <div class="pd">$!autoStringUtil.getYuan($customer.initDebt)</div>
+                </div>
+                <div class="col-sm-1 col-md-1 well-section">+
+                </div>
+                <div class="col-sm-2 col-md-2 well-section">增加应收欠款
+                    <div class="pd">$!autoStringUtil.getYuan($sumOrderDebt)</div>
+                </div>
+                <div class="col-sm-1 col-md-1 well-section">-
+                </div>
+                <div class="col-sm-2 col-md-2 well-section" style="border: none">收回欠款
+                    <div class="pd">$!autoStringUtil.getYuan($sumReceipt)</div>
+                </div>
+
+            </div>
+
+        </div>
+		<form class="form-horizontal form_validation_ttip" method="post" action="$homeModule.getTarget("#")" novalidate="novalidate">
+
+            <div class="row">
+                <div class="col-sm-4 col-md-4">
+                    <div class="btn-group">
+                        <a href="/customer/detail.html?type=1&id=$id" class="btn btn-primary">收款历史</a>
+                        <a href="/customer/detail.html?type=2&id=$id" class="btn btn-default">订单历史</a>
+##                        <a href="#" class="btn btn-default">按单据</a>
+                    </div>
+                </div>
+                <div class="col-sm-8 col-md-8">
+
+##                    <div class="col-sm-6 col-md-6">
+##                        <label class="control-label col-sm-4 col-md-4">
+##                            商品分类：
+##                        </label>
+##                        <div class="col-sm-8 col-md-8">
+##                            <select id="name" name="alarmGroup.name" class="form-control" >
+##                                <option>全部</option>
+##                            </select>
+##                            <span class="help-block"></span>
+##                        </div>
+##                    </div>
+##                    <div class="col-sm-6 col-md-6">
+##                        <button class="btn btn-default pull-right">搜索</button>
+##                        <input id="name" name="alarmGroup.name" class="form-control form-input pull-right" type="text" placceholder="搜索编号、名称、规格、属性">
+##                    </div>
+                </div>
+            </div>
+
+		#**
+		 <div class="form-actions">
+		 <button class="btn btn-primary" type="submit">搜索</button>
+		 </div>
+		 *#
+        </form>
+
+        <table class="table table-bordered table-striped table_vam table-responsive" id="dt_gal">
+            <thead>
+            <tr>
+                <th class="table_checkbox">
+                    <input name="select_rows" class="select_rows" data-tableid="dt_gal" type="checkbox"/>
+                </th>
+                <th>序号</th>
+                <th>业务日期</th>
+                <th>单据编号</th>
+                <th>金额(元)</th>
+                <th>门店</th>
+                <th>备注</th>
+                <th style="width:200px">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+				#if($!receiptCustomerList && $!receiptCustomerList.size()>0)
+					#foreach($this in $receiptCustomerList)
+                    <tr>
+                        <td>
+                            <input name="row_sel" class="select_row" type="checkbox" value="$!this.id" />
+                        </td>
+                        <th>$!this.id</th>
+                        <th>$!dateFormatUtils.format($!this.businessDate,"yyyy-MM-dd HH:mm")</th>
+                        <th>$!this.serialNumber</th>
+                        <th>$!autoStringUtil.getYuan($!this.amount)</th>
+                        <th>$!store.name</th>
+                        <th>$!this.remark</th>
+                        <td>
+                            <a  href="/financial/receive/update.html?id=$!this.id" data-delid="$!this.id"
+                                class="update_rows" title="">
+                                <span class="glyphicon glyphicon-pencil"></span>修改
+                            </a>
+                            <a href="#" class="delete_rows" data-delid="$!this.id" title="">
+                                <span class="glyphicon glyphicon-trash"></span>删除
+                            </a>
+                        </td>
+                    </tr>
+					#end
+				#end
+            </tbody>
+        </table>
+    </div>
+</div>
+
+#define($scriptHtml)
+
+<script src="$!homeModule.getTarget("main/business/sale/customer-detail.js")" />
+
+#end

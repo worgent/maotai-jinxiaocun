@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+       default-autowire="byName">
+    <bean name="velocityTools" class="java.util.HashMap">
+        <constructor-arg>
+            <map>
+                <entry key="stringUtils">
+                    <bean class="org.apache.commons.lang.StringUtils"/>
+                </entry>
+                <entry key="stringEscapeUtils">
+                    <bean class="com.sohu.mrd.domain.util.common.StringEscapeUtils"/>
+                </entry>
+                <entry key="dateFormatUtils">
+                    <bean class="com.sohu.mrd.domain.util.common.DateFormatUtils"/>
+                </entry>
+                <entry key="dateUtils">
+                    <bean class="org.apache.commons.lang.time.DateUtils"/>
+                </entry>
+                <entry key="decimalFormatUtils">
+                    <bean class="com.sohu.mrd.domain.util.common.DecimalFormatUtils"/>
+                </entry>
+                <entry key="webHelper">
+                    <bean class="com.sohu.mrd.domain.util.WebMvcHelper"/>
+                </entry>
+                <entry key="czDateUtil">
+                    <bean class="com.sohu.mrd.domain.util.DateUtil"/>
+                </entry>
+                <entry key="autoStringUtil">
+                    <bean class="com.sohu.mrd.domain.util.StringUtil"/>
+                </entry>
+                <entry key="localHost">
+                    <bean class="com.sohu.mrd.domain.util.network.LocalHost"/>
+                </entry>
+            </map>
+        </constructor-arg>
+    </bean>
+    <bean id="velocityUrl" class="java.util.HashMap">
+        <constructor-arg>
+            <map>
+                <!--本系统自己地址-->
+                <entry key="homeModule">
+                    <bean class="com.sohu.mrd.domain.util.url.JdUrl">
+                        <property name="url" value="http://${mrd.analysis.domain.name}"/>
+                    </bean>
+                </entry>
+                <!--登录地址-->
+                <entry key="loginUrl">
+                    <bean class="com.sohu.mrd.domain.util.url.JdUrl">
+                        <property name="url" value="${mrd.analysis.login.address}"/>
+                    </bean>
+                </entry>
+            </map>
+        </constructor-arg>
+    </bean>
+    <!--以下是用于登录的   start-->
+    <bean id="jdSecurity" class="com.sohu.mrd.domain.util.web.FilePathSecurity">
+        <property name="unProtectedFile">
+            <list>
+                <value>/login.html</value>
+                <value>/index.html</value>
+                <value>/doLogin.html</value>
+                <value>/logout.html</value>
+                <value>/doRegister.html</value>
+            </list>
+        </property>
+        <property name="unProtectedPath">
+            <list>
+                <value>/help/</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="jdUrlUtils" class="com.sohu.mrd.domain.util.url.JdUrlUtils"/>
+    <bean id="cookieUtils" class="com.sohu.mrd.domain.util.springmvc.cookie.CookieUtils" />
+    <bean id="cookieCipherTools" class="com.sohu.mrd.domain.util.springmvc.cookie.CookieCipherTools">
+        <property name="charsetName" value="gbk"/>
+    </bean>
+    <bean class="com.sohu.mrd.domain.util.springmvc.interceptor.NewLoginContextInterceptor">
+        <property name="loginCookieKey" value="${mrd.login.cookie.name}"/>
+        <property name="sessionTimeout" value="${mrd.session.timeout}"/>
+    </bean>
+    <bean class="com.sohu.mrd.domain.util.springmvc.interceptor.SetCookieAndLoginContextInterceptor">
+        <property name="loginCookieKey" value="${mrd.login.cookie.name}"/>
+    </bean>
+    <bean id="loginService" class="com.sohu.service.login.impl.LoginServiceImpl">
+        <property name="loginCookieKey" value="${mrd.login.cookie.name}"/>
+    </bean>
+    <bean class="com.sohu.mrd.domain.util.springmvc.cookie.ShiLiCookie" abstract="true" id="shiLiEncryptCookie">
+        <property name="encrypt" value="true"/>
+        <property name="key" value="${mrd.cookie.key}"/>
+    </bean>
+
+    <bean abstract="true" parent="shiLiEncryptCookie" id="shiLiLoginCookie">
+        <property name="path" value="/"/>
+    </bean>
+
+    <bean id="shiLiCookie" class="java.util.ArrayList">
+        <constructor-arg>
+            <list>
+                <bean parent="shiLiLoginCookie">
+                    <property name="name" value="${mrd.login.cookie.name}"/>
+                </bean>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <!--以下是用于登录的   end-->
+</beans>

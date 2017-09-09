@@ -1,0 +1,96 @@
+<a class="sidebar_switch on_switch ttip_r" href="javascript:void(0)" oldtitle="Hide Sidebar">Sidebar switch</a>
+<div class="sidebar">
+
+<div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 499px;"><div class="sidebar_inner_scroll" style="overflow: hidden; width: auto; height: 499px;">
+<div class="sidebar_inner" style="margin-bottom: -92px; min-height: 100%;">
+    <form method="post" class="input-group input-group-sm" action="#">
+        <span class="twitter-typeahead" style="position: relative; display: inline-block;"><input type="text" disabled="" spellcheck="off" autocomplete="off" class="tt-hint" style="position: absolute; top: 0px; left: 0px; border-color: transparent; box-shadow: none; background: none repeat scroll 0% 0% rgb(255, 255, 255);"><input type="text" placeholder="Search..." size="16" class="search_query form-control input-sm tt-query" name="query" autocomplete="off" spellcheck="false" style="position: relative; vertical-align: top; background-color: transparent;" dir="auto"><span style="position: absolute; left: -9999px; visibility: hidden; white-space: nowrap; font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif; font-size: 12px; font-style: normal; font-variant: normal; font-weight: 400; word-spacing: 0px; letter-spacing: 0px; text-indent: 0px; text-rendering: optimizelegibility; text-transform: none;"></span><span class="tt-dropdown-menu" style="position: absolute; top: 100%; left: 0px; z-index: 100; display: none;"></span></span>
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="submit">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </button>
+						</span>
+    </form>
+    <div class="panel-group" id="side_accordion">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#side_accordion" href="#collapseOne">
+                    <i class="glyphicon glyphicon-tasks"></i> 定时任务管理
+                </a>
+            </div>
+            <div id="collapseOne" class="accordion-body collapse #if($!script == "task_toIndex") in #end">
+                <div class="panel-body">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li class="#if($!script == "task_toIndex") active #end">
+                            <a href="$homeModule.getTarget("/task/task_toIndex.action")">定时任务管理</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+	    <div class="panel panel-default">
+			<div class="panel-heading">
+				<a class="accordion-toggle" data-toggle="collapse" data-parent="#side_accordion" href="#collapse7">
+					<i class="glyphicon glyphicon-th"></i> 计算器
+				</a>
+			</div>
+			<div id="collapse7" class="accordion-body collapse">
+				<div class="panel-body">
+					<form id="calc" name="Calc">
+						<div class="formSep input-group input-group-sm">
+							<input type="text" name="Input" class="form-control">
+								<span class="input-group-btn">
+									<button onclick="Calc.Input.value = ''" value="c" name="clear" class="btn btn-default" type="button">
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                    </button>
+								</span>
+                    	</div>
+						<div class="form-group">
+							<input type="button" onclick="Calc.Input.value += '7'" value="7" name="seven" class="btn form-control btn-default input-sm">
+							<input type="button" onclick="Calc.Input.value += '8'" value="8" name="eight" class="btn form-control btn-default input-sm">
+							<input type="button" onclick="Calc.Input.value += '9'" value="9" name="nine" class="btn form-control btn-default input-sm">
+							<input type="button" onclick="Calc.Input.value += ' / '" value="/" name="div" class="btn form-control btn-default input-sm">
+						</div>
+						<div class="form-group">
+							<input type="button" onclick="Calc.Input.value += '4'" value="4" name="four" class="btn form-control btn-default input-sm">
+                            <input type="button" onclick="Calc.Input.value += '5'" value="5" name="five" class="btn form-control btn-default input-sm">
+                            <input type="button" onclick="Calc.Input.value += '6'" value="6" name="six" class="btn form-control btn-default input-sm">
+                            <input type="button" onclick="Calc.Input.value += ' * '" value="x" name="times" class="btn form-control btn-default input-sm">
+						</div>
+						<div class="form-group">
+							<input type="button" onclick="Calc.Input.value += '1'" value="1" name="one" class="btn form-control btn-default input-sm">
+                            <input type="button" onclick="Calc.Input.value += '2'" value="2" name="two" class="btn form-control btn-default input-sm">
+                            <input type="button" onclick="Calc.Input.value += '3'" value="3" name="three" class="btn form-control btn-default input-sm">
+                            <input type="button" onclick="Calc.Input.value += ' - '" value="-" name="minus" class="btn form-control btn-default input-sm">
+						</div>
+						<div class="formSep form-group">
+                            <input type="button" onclick="Calc.Input.value += '.'" value="." name="dot" class="btn form-control btn-default input-sm">
+                            <input type="button" onclick="Calc.Input.value += '0'" value="0" name="zero" class="btn form-control btn-default input-sm">
+                            <input type="button" onclick="Calc.Input.value = Math.round( eval(Calc.Input.value) * 1000)/1000" value="=" name="DoIt" class="btn form-control btn-default input-sm">
+                            <input type="button" onclick="Calc.Input.value += ' + '" value="+" name="plus" class="btn form-control btn-default input-sm">
+						</div>
+                	</form>
+            	</div>
+        	</div>
+		</div>
+	</div>
+	<div class="push" style="height: 92px;"></div>
+</div>
+
+<div class="sidebar_info" style="height: 92px;">
+    <ul class="list-unstyled">
+        <li>
+            <span class="act act-warning">65</span> <strong>新消息</strong>
+        </li>
+        <li>
+            <span class="act act-success">10</span> <strong>新任务</strong>
+        </li>
+        <li>
+            <span class="act act-danger">85</span>
+            <strong>新用户</strong>
+        </li>
+    </ul>
+</div>
+</div><div class="slimScrollBar" style="background: none repeat scroll 0% 0% rgb(0, 0, 0); width: 7px; position: absolute; top: -351px; opacity: 0.2; display: block; border-radius: 7px; z-index: 99; left: 1px; height: 389.064px;"></div><div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: none repeat scroll 0% 0% rgb(51, 51, 51); opacity: 0.2; z-index: 90; left: 1px;"></div></div>
+
+</div>

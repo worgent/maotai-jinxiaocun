@@ -1,0 +1,269 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <parent>
+        <groupId>com.sohu.account-manager</groupId>
+        <artifactId>account-manager</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>account-manager-web</artifactId>
+    <packaging>war</packaging>
+    <name>account-manager-web</name>
+    <url>http://maven.apache.org</url>
+      <properties>
+          <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      </properties>
+
+      <dependencies>
+          <dependency>
+              <groupId>junit</groupId>
+              <artifactId>junit</artifactId>
+              <version>4.10</version>
+              <scope>test</scope>
+          </dependency>
+          <dependency>
+              <groupId>com.sohu.account-manager</groupId>
+              <artifactId>account-manager-service</artifactId>
+              <version>1.0-SNAPSHOT</version>
+          </dependency>
+          <dependency>
+              <groupId>net.sf.ehcache</groupId>
+              <artifactId>ehcache</artifactId>
+              <version>2.9.0</version>
+          </dependency>
+          <!--<dependency>-->
+              <!--<groupId>spy</groupId>-->
+              <!--<artifactId>spymemcached</artifactId>-->
+              <!--<version>2.8.1</version>-->
+          <!--</dependency>-->
+<!--add by tianbc-->
+          <dependency>
+              <groupId>com.alibaba</groupId>
+              <artifactId>fastjson</artifactId>
+              <version>1.1.41</version>
+          </dependency>
+          <dependency>
+              <groupId>joda-time</groupId>
+              <artifactId>joda-time</artifactId>
+              <version>2.7</version>
+          </dependency>
+
+          <dependency>
+              <groupId>com.fasterxml.jackson.core</groupId>
+              <artifactId>jackson-core</artifactId>
+              <version>2.2.3</version>
+          </dependency>
+          <dependency>
+              <groupId>com.fasterxml.jackson.core</groupId>
+              <artifactId>jackson-databind</artifactId>
+              <version>2.2.3</version>
+          </dependency>
+          <dependency>
+              <groupId>com.fasterxml.jackson.core</groupId>
+              <artifactId>jackson-annotations</artifactId>
+              <version>2.2.3</version>
+          </dependency>
+      </dependencies>
+    <build>
+        <finalName>account-manager</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <excludes>
+                </excludes>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>tomcat-maven-plugin</artifactId>
+                <version>1.1</version>
+                <configuration>
+                    <port>80</port>
+                    <path>/</path>
+                </configuration>
+            </plugin>
+
+                <plugin>
+                    <groupId>org.mybatis.generator</groupId>
+                    <artifactId>mybatis-generator-maven-plugin</artifactId>
+                    <version>1.3.2</version>
+                    <configuration>
+                        <verbose>true</verbose>
+                        <overwrite>true</overwrite>
+                    </configuration>
+                </plugin>
+        </plugins>
+    </build>
+    <profiles>
+        <profile>
+            <id>jinxiaocun</id>
+
+            <properties>
+				<mrd.analysis.login.address>http://jin.iwpoo.com:8088/login.html</mrd.analysis.login.address>
+				<mrd.analysis.domain.name>jin.iwpoo.com:8088/</mrd.analysis.domain.name>
+				<mrd.analysis.log.path>logs</mrd.analysis.log.path>
+                <!-- 数据源 mysql -->
+                <mrd.analysis.jdbc.driver>com.mysql.jdbc.Driver</mrd.analysis.jdbc.driver>
+               <!--  <mrd.analysis.jdbc.url>jdbc:mysql://10.13.85.181:3306/quantitative_analysis_test?characterEncoding=UTF-8</mrd.analysis.jdbc.url>
+                <mrd.analysis.jdbc.username>root</mrd.analysis.jdbc.username>
+                <mrd.analysis.jdbc.password>7bb98050796b649e</mrd.analysis.jdbc.password> -->
+                <mrd.analysis.jdbc.url>jdbc:mysql://localhost:3306/jinxiaocun?characterEncoding=UTF-8</mrd.analysis.jdbc.url>
+                <mrd.analysis.jdbc.username>root</mrd.analysis.jdbc.username>
+                <mrd.analysis.jdbc.password></mrd.analysis.jdbc.password>
+                <!--以下是用于cookie，登录时用的 start-->
+                <mrd.login.cookie.name>_mrdanalysis_</mrd.login.cookie.name>
+                <!--加密cookie的key-->
+                <mrd.cookie.key>xLyhSVcQGix62o+t2fjZyx+bC+zQZCl2</mrd.cookie.key>
+                <!--session超时时间-->
+                <mrd.session.timeout>1800</mrd.session.timeout>  
+                <!--以下是用于cookie，登录时用的 end-->
+                <mrd.struts.hrm>testAuthorInterceptor</mrd.struts.hrm>
+                <!--以下是用于权限的用的 end-->
+                
+<!--                 <mrd.analysis.server.Ip>192.168.46.135</mrd.analysis.server.Ip>
+                <mrd.analysis.server.user>root</mrd.analysis.server.user>
+                <mrd.analysis.server.pwd>7ppzvT7ZPT</mrd.analysis.server.pwd>
+                <mrd.analysis.server.dir>/data/mrd/lab</mrd.analysis.server.dir>
+                <mrd.analysis.docker.switch>false</mrd.analysis.docker.switch> -->
+                <mrd.analysis.server.Ip>10.10.93.164</mrd.analysis.server.Ip>
+                <mrd.analysis.server.user>root</mrd.analysis.server.user>
+                <mrd.analysis.server.pwd>SohuVms!^$</mrd.analysis.server.pwd>
+                <mrd.analysis.server.dir>/data/mrd/lab</mrd.analysis.server.dir>
+                <mrd.analysis.docker.switch>true</mrd.analysis.docker.switch>
+            </properties>
+        </profile>
+        <profile>
+            <id>development</id>
+
+            <properties>
+                <mrd.analysis.login.address>http://127.0.0.1:8080/login.html</mrd.analysis.login.address>
+                <mrd.analysis.domain.name>127.0.0.1:8080/</mrd.analysis.domain.name>
+                <mrd.analysis.log.path>logs</mrd.analysis.log.path>
+                <!-- 数据源 mysql -->
+                <mrd.analysis.jdbc.driver>com.mysql.jdbc.Driver</mrd.analysis.jdbc.driver>
+                <!--  <mrd.analysis.jdbc.url>jdbc:mysql://10.13.85.181:3306/quantitative_analysis_test?characterEncoding=UTF-8</mrd.analysis.jdbc.url>
+                 <mrd.analysis.jdbc.username>root</mrd.analysis.jdbc.username>
+                 <mrd.analysis.jdbc.password>7bb98050796b649e</mrd.analysis.jdbc.password> -->
+                <mrd.analysis.jdbc.url>jdbc:mysql://localhost:3306/jinxiaocun?characterEncoding=UTF-8</mrd.analysis.jdbc.url>
+                <mrd.analysis.jdbc.username>root</mrd.analysis.jdbc.username>
+                <mrd.analysis.jdbc.password></mrd.analysis.jdbc.password>
+                <!--以下是用于cookie，登录时用的 start-->
+                <mrd.login.cookie.name>_mrdanalysis_</mrd.login.cookie.name>
+                <!--加密cookie的key-->
+                <mrd.cookie.key>xLyhSVcQGix62o+t2fjZyx+bC+zQZCl2</mrd.cookie.key>
+                <!--session超时时间-->
+                <mrd.session.timeout>1800</mrd.session.timeout>
+                <!--以下是用于cookie，登录时用的 end-->
+                <mrd.struts.hrm>testAuthorInterceptor</mrd.struts.hrm>
+                <!--以下是用于权限的用的 end-->
+
+                <!--                 <mrd.analysis.server.Ip>192.168.46.135</mrd.analysis.server.Ip>
+                                <mrd.analysis.server.user>root</mrd.analysis.server.user>
+                                <mrd.analysis.server.pwd>7ppzvT7ZPT</mrd.analysis.server.pwd>
+                                <mrd.analysis.server.dir>/data/mrd/lab</mrd.analysis.server.dir>
+                                <mrd.analysis.docker.switch>false</mrd.analysis.docker.switch> -->
+                <mrd.analysis.server.Ip>10.10.93.164</mrd.analysis.server.Ip>
+                <mrd.analysis.server.user>root</mrd.analysis.server.user>
+                <mrd.analysis.server.pwd>SohuVms!^$</mrd.analysis.server.pwd>
+                <mrd.analysis.server.dir>/data/mrd/lab</mrd.analysis.server.dir>
+                <mrd.analysis.docker.switch>true</mrd.analysis.docker.switch>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>online_development</id>
+
+            <properties>
+                <mrd.analysis.login.address>http://10.10.93.164/login.html</mrd.analysis.login.address>
+                <mrd.analysis.domain.name>10.10.93.164</mrd.analysis.domain.name>
+                <mrd.analysis.log.path>logs</mrd.analysis.log.path>
+                <!-- 数据源 mysql -->
+                <mrd.analysis.jdbc.driver>com.mysql.jdbc.Driver</mrd.analysis.jdbc.driver>
+                <mrd.analysis.jdbc.url>jdbc:mysql://10.13.85.181:3306/quantitative_analysis_test?characterEncoding=UTF-8</mrd.analysis.jdbc.url>
+                <mrd.analysis.jdbc.username>root</mrd.analysis.jdbc.username>
+                <mrd.analysis.jdbc.password>7bb98050796b649e</mrd.analysis.jdbc.password>
+                <!--以下是用于cookie，登录时用的 start-->
+                <mrd.login.cookie.name>_mrdanalysis_</mrd.login.cookie.name>
+                <!--加密cookie的key-->
+                <mrd.cookie.key>xLyhSVcQGix62o+t2fjZyx+bC+zQZCl2</mrd.cookie.key>
+                <!--session超时时间-->
+                <mrd.session.timeout>1800</mrd.session.timeout>
+                <!--以下是用于cookie，登录时用的 end-->
+                <mrd.struts.hrm>onlineAuthorInterceptor</mrd.struts.hrm>
+                
+                <mrd.analysis.server.Ip>10.10.93.164</mrd.analysis.server.Ip>
+                <mrd.analysis.server.user>root</mrd.analysis.server.user>
+                <mrd.analysis.server.pwd>SohuVms!^$</mrd.analysis.server.pwd>
+                <mrd.analysis.server.dir>/data/mrd/lab</mrd.analysis.server.dir>
+                <mrd.analysis.docker.switch>true</mrd.analysis.docker.switch>
+                <!--以下是用于权限的用的 end-->
+            </properties>
+        </profile>
+        <profile>
+            <id>docker_development</id>
+
+            <properties>
+                <mrd.analysis.login.address>http://10.13.85.180/login.html</mrd.analysis.login.address>
+                <mrd.analysis.domain.name>10.13.85.180</mrd.analysis.domain.name>
+                <mrd.analysis.log.path>logs</mrd.analysis.log.path>
+                <!-- 数据源 mysql -->
+                <mrd.analysis.jdbc.driver>com.mysql.jdbc.Driver</mrd.analysis.jdbc.driver>
+                <mrd.analysis.jdbc.url>jdbc:mysql://10.13.85.181:3306/quantitative_analysis?characterEncoding=UTF-8</mrd.analysis.jdbc.url>
+                <mrd.analysis.jdbc.username>root</mrd.analysis.jdbc.username>
+                <mrd.analysis.jdbc.password>7bb98050796b649e</mrd.analysis.jdbc.password>
+                <!--以下是用于cookie，登录时用的 start-->
+                <mrd.login.cookie.name>_mrdanalysis_</mrd.login.cookie.name>
+                <!--加密cookie的key-->
+                <mrd.cookie.key>xLyhSVcQGix62o+t2fjZyx+bC+zQZCl2</mrd.cookie.key>
+                <!--session超时时间-->
+                <mrd.session.timeout>1800</mrd.session.timeout>
+                <!--以下是用于cookie，登录时用的 end-->
+                <mrd.struts.hrm>onlineAuthorInterceptor</mrd.struts.hrm>
+                
+                <mrd.analysis.server.Ip>10.13.85.180</mrd.analysis.server.Ip>
+                <mrd.analysis.server.user>root</mrd.analysis.server.user>
+                <mrd.analysis.server.pwd>iqM2ZeU8j)</mrd.analysis.server.pwd>
+                <mrd.analysis.server.dir>/data/mrd/lab</mrd.analysis.server.dir>
+                <mrd.analysis.docker.switch>true</mrd.analysis.docker.switch>
+                <!--以下是用于权限的用的 end-->
+            </properties>
+        </profile>
+        <profile>
+            <id>production</id>
+
+            <properties>
+<!--                 <mrd.analysis.login.address>http://192.168.46.135/login.html</mrd.analysis.login.address>
+                <mrd.analysis.domain.name>192.168.46.135</mrd.analysis.domain.name> -->
+<!--                 <mrd.analysis.login.address>http://10.13.85.179:8091/login.html</mrd.analysis.login.address>
+                <mrd.analysis.domain.name>10.13.85.179:8091</mrd.analysis.domain.name> -->
+                <mrd.analysis.login.address>http://jin.iwpoo.com:8088/login.html</mrd.analysis.login.address>
+                <mrd.analysis.domain.name>jin.iwpoo.com:8088/</mrd.analysis.domain.name>
+                <mrd.analysis.log.path>logs</mrd.analysis.log.path>
+                <!-- 数据源 mysql -->
+                <mrd.analysis.jdbc.driver>com.mysql.jdbc.Driver</mrd.analysis.jdbc.driver>
+                <mrd.analysis.jdbc.url>jdbc:mysql://10.13.85.181:3306/quantitative_analysis?characterEncoding=UTF-8</mrd.analysis.jdbc.url>
+                <mrd.analysis.jdbc.username>root</mrd.analysis.jdbc.username>
+                <mrd.analysis.jdbc.password>7bb98050796b649e</mrd.analysis.jdbc.password>
+                <!--以下是用于cookie，登录时用的 start-->
+                <mrd.login.cookie.name>_mrdanalysis_</mrd.login.cookie.name>
+                <!--加密cookie的key-->
+                <mrd.cookie.key>xLyhSVcQGix62o+t2fjZyx+bC+zQZCl2</mrd.cookie.key>
+                <!--session超时时间-->
+                <mrd.session.timeout>1800</mrd.session.timeout>
+                <!--以下是用于cookie，登录时用的 end-->
+                <mrd.struts.hrm>onlineAuthorInterceptor</mrd.struts.hrm>
+                
+                <mrd.analysis.server.Ip>10.13.85.180</mrd.analysis.server.Ip>
+                <mrd.analysis.server.user>root</mrd.analysis.server.user>
+                <mrd.analysis.server.pwd>iqM2ZeU8j)</mrd.analysis.server.pwd>
+                <mrd.analysis.server.dir>/data/mrd/lab</mrd.analysis.server.dir>
+                <mrd.analysis.docker.switch>true</mrd.analysis.docker.switch>
+                <!--以下是用于权限的用的 end-->
+            </properties>
+        </profile>
+
+    </profiles>
+
+</project>

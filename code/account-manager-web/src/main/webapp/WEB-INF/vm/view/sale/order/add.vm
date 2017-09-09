@@ -1,0 +1,130 @@
+
+#set($menuParent = "sale")
+#set($menu = "sale_order_add")
+
+#define($cssHtml)
+
+<link href="$homeModule.getTarget("main/css/jquery.edittable.css")" rel="stylesheet" />
+
+#end
+
+<div id="jCrumbs" class="breadCrumb module">
+    <div style="overflow:hidden; position:relative; width: 1299px;"><div><ul style="width: 5006px;">
+        <li class="first">
+            <a href="#">
+                <i class="glyphicon glyphicon-home"></i>
+            </a>
+        </li>
+        <li>
+            <a href="#">销售管理</a>
+        </li>
+        <li>
+            <a href="#">订单</a>
+        </li>
+        <li class="last">添加</li>
+    </ul></div></div>
+</div>
+<div class="container">
+<div class="row">
+    <div class="col-sm-12 col-md-12">
+        <h3 class="heading" style="text-align: center">
+        	<div class="row">
+	    		<div class="col-sm-2 col-md-2" style="margin-left: 60px;">
+	    			<div style="float: left;margin-left: -60px;">门店：</div>
+	    			<select id="storeId" name="storeId" class="form-control" type="text" >
+	    				#foreach($!this in $!tStores)
+	    					#if($!this.id == $!employee.storeId)
+	    						<option value="$!this.id">$!this.name</option>
+	    					#end
+	    				#end
+	    			</select>
+	    		</div>
+	    		<div class="col-sm-2 col-md-2" style="margin-left: 60px;">
+	    			<div style="float: left;margin-left: -60px;">客户：</div>
+	    			<select id="customerId" name="customerId" class="form-control" type="text" >
+	    				#foreach($!this in $!tCustomers)
+	    					<option value="$!this.id">$!this.name</option>
+	    				#end
+	    			</select>
+	    		</div>
+	        
+	        	<div class="col-sm-6 col-md-6 pull-right">
+	        		商品销售订单
+	        	</div>
+	        	
+	        	#**
+	        	<div class="col-sm-3 col-md-3" style="font-size: 12px;">
+	        		单据编号: <span id="serialNumber">DD____________</span>
+	        	</div>
+	        	*#
+        	</div>
+        </h3>
+        <div class="row">
+	        <div class="col-sm-offset-8 col-sm-4 col-sm-offset-8 col-sm-md-4">
+		        <form class="form-inline">
+					<div class="form-group">
+						<label for="exampleInputEmail2">经手人：</label>
+						<select id="handler" name="handler" class="form-control" type="text" >
+		    				#foreach($!this in $!tEmployees)
+		    					<option value="$!this.id">$!this.name</option>
+		    				#end
+	    			</select>
+					</div>
+					<div class="form-group">
+						<label for="exampleInputEmail2">业务日期：</label>
+						<input id="businessDate" name="businessDate" value="$!date" class="form-control datetimepicker" type="text">
+					</div>
+				</form>
+			</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12 col-md-12">
+					<table class="table table-striped table_vam table-responsive" id="edittable">
+			        
+			        </table>
+				</div>
+			</div>
+    	</div>
+    	<div class="row">
+    		<div class="col-sm-12 col-md-12">
+    			<div style="width: 200px;float: right">
+	    			<div class="heading">
+						<div>合计：<div style="float:right"><span id="p_cal_sum"></span></div></div>
+	    				<div>折扣率：<div style="float:right"><input id="discountRate" name="discountRate" value="100" class="" / style="width:50px;">%
+	    				</div>
+	    				<div>其他费用：</div>    			
+	    			</div>
+	    			<div>
+	    				<div>总计金额：<div style="float:right"><span id="n_cal_sum"></span></div></div>
+	    			</div>
+    			</div>
+    		</div>
+    	</div>
+    	<div style="padding: 10px;"></div>
+    	<div class="row">
+    		<div class="col-sm-10 col-md-10">
+    			<span>制单人：</span><span id="lister">$!employee.name</span>
+    			&nbsp;&nbsp;&nbsp;&nbsp;
+    			<span>制单时间：</span><span id="createTime">$!date</span>
+    		</div>
+    		<div class="col-sm-2 col-md-2">
+    			<a href="#" class="btn btn-default" style="float:right" id="order_save">保存</a>
+    		</div>
+    	</div>
+	</div>
+</div>
+
+<div id="commodity_info" style="display:none">
+	<select class="form-control" style="width: 120px;">
+		#foreach($!this in $!tCommoditys)
+		<option value="$!this.id">$!this.name</option>
+		#end
+	</select>
+</div>
+
+#define($scriptHtml)
+
+<script src="$!homeModule.getTarget("main/js/jquery.edittable.min.js")"></script>
+<script src="$!homeModule.getTarget("main/business/sale/order-add.js")" />
+
+#end

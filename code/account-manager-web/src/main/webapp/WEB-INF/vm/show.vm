@@ -1,0 +1,11 @@
+#set($layout="/WEB-INF/vm/layout/login.vm")
+#* @vtlvariable name="returnUrl" type="java.lang.String" *#
+#* @vtlvariable name="loginUrl" type="java.lang.String" *#
+#* @vtlvariable name="pin" type="java.lang.String" *#
+#* @vtlvariable name="passwd" type="java.lang.String" *#
+#set($title="用户显示页面")
+
+$content
+ 
+
+

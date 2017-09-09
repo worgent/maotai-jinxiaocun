@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <properties resource="generator.properties"></properties>
+
+    <classPathEntry location="${jdbc.driverLocation}"/>
+
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+
+
+        <commentGenerator>
+            <property name="suppressDate" value="true" />
+        </commentGenerator>
+
+
+        <jdbcConnection driverClass="${jdbc.driverClass}" connectionURL="${jdbc.connectionURL}" userId="${jdbc.userId}" password="${jdbc.password}">
+        </jdbcConnection>
+
+ <!-- Model模型生成器,用来生成含有主键key的类，记录类 以及查询Example类  
+            targetPackage     指定生成的model生成所在的包名  
+            targetProject     指定在该项目下所在的路径  
+        -->
+        <javaModelGenerator targetPackage="com.sohu.mrd.domain.beans" targetProject="C:\workdir\liujia\jinxiaocun\svn\project\jinxiaocun\account-manager-domain\src\main\java">
+            <property name="constructorBased" value="false"/>
+            <property name="enableSubPackages" value="false"/>
+            <property name="immutable" value="false"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!--Mapper映射文件生成所在的目录 C:\work\backEnd\trunk\vip-card为每一个数据库的表生成对应的SqlMap文件  D:\1me\newwork\weixin-assistant  C:\Users\tianbaochao\svnwork\sns\trunk\jumppath\src\main\java-->
+        <sqlMapGenerator targetPackage="src.main.resources.mapper" targetProject="C:\workdir\liujia\jinxiaocun\svn\project\jinxiaocun\account-manager-dao">
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+
+        <javaClientGenerator targetPackage="com.sohu.dao" targetProject="C:\workdir\liujia\jinxiaocun\svn\project\jinxiaocun\account-manager-dao\src\main\java" type="XMLMAPPER">
+            <property name="enableSubPackages" value=""/>
+            <property name="exampleMethodVisibility" value=""/>
+            <property name="methodNameCalculator" value=""/>
+            <property name="rootInterface" value=""/>
+
+        </javaClientGenerator>
+
+
+
+
+        <table tableName="t_login" schema="" alias="t_login">
+            <generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type=""/>
+        </table>
+        <table tableName="t_commodity" schema="" alias="t_commodity">
+            <generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type=""/>
+        </table>
+        <table tableName="t_customer" schema="" alias="t_customer">
+            <generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type=""/>
+        </table>
+        <table tableName="t_employee" schema="" alias="t_employee">
+            <generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type=""/>
+        </table>
+        <table tableName="t_expense" schema="" alias="t_expense">
+            <generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type=""/>
+        </table>
+        <table tableName="t_order" schema="" alias="t_order">
+            <generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type=""/>
+        </table>
+        <table tableName="t_order_commodity" schema="" alias="t_order_commodity">
+            <generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type=""/>
+        </table>
+        <table tableName="t_receipt" schema="" alias="t_receipt">
+            <generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type=""/>
+        </table>
+        <table tableName="t_store" schema="" alias="t_store">
+            <generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type=""/>
+        </table>
+
+    </context>
+</generatorConfiguration>  

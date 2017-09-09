@@ -1,0 +1,78 @@
+<div class="style_switcher">
+    <div class="sepH_c">
+        <p>Colors:</p>
+        <div class="clearfix">
+            <a title="blue" class="style_item jQclr blue_theme style_active" href="javascript:void(0)">blue</a>
+            <a title="dark" class="style_item jQclr dark_theme" href="javascript:void(0)">dark</a>
+            <a title="green" class="style_item jQclr green_theme" href="javascript:void(0)">green</a>
+            <a title="brown" class="style_item jQclr brown_theme" href="javascript:void(0)">brown</a>
+            <a title="eastern_blue" class="style_item jQclr eastern_blue_theme" href="javascript:void(0)">eastern blue</a>
+            <a title="tamarillo" class="style_item jQclr tamarillo_theme" href="javascript:void(0)">tamarillo</a>
+        </div>
+    </div>
+    <div class="sepH_c">
+        <p>Backgrounds:</p>
+        <div class="clearfix">
+            <span title="" class="style_item jQptrn style_active ptrn_def"></span>
+            <span title="ptrn_a" class="ssw_ptrn_a style_item jQptrn"></span>
+            <span title="ptrn_b" class="ssw_ptrn_b style_item jQptrn"></span>
+            <span title="ptrn_c" class="ssw_ptrn_c style_item jQptrn"></span>
+            <span title="ptrn_d" class="ssw_ptrn_d style_item jQptrn"></span>
+            <span title="ptrn_e" class="ssw_ptrn_e style_item jQptrn"></span>
+        </div>
+    </div>
+    <div class="sepH_c">
+        <p>Layout:</p>
+        <div class="clearfix">
+            <label class="radio-inline">
+                <input type="radio" checked="checked" value="" id="ssw_layout_fluid" name="ssw_layout">Fluid</label>
+            <label class="radio-inline">
+                <input type="radio" value="gebo-fixed" id="ssw_layout_fixed" name="ssw_layout">Fixed</label>
+        </div>
+    </div>
+    <div class="sepH_c">
+        <p>Sidebar position:</p>
+        <div class="clearfix">
+            <label class="radio-inline">
+                <input type="radio" checked="checked" value="" id="ssw_sidebar_left" name="ssw_sidebar">Left</label>
+            <label class="radio-inline">
+                <input type="radio" value="sidebar_right" id="ssw_sidebar_right" name="ssw_sidebar">Right</label>
+        </div>
+    </div>
+    <div class="sepH_c">
+        <p>Show top menu on:</p>
+        <div class="clearfix">
+            <label class="radio-inline">
+                <input type="radio" checked="checked" value="" id="ssw_menu_click" name="ssw_menu">Click</label>
+            <label class="radio-inline">
+                <input type="radio" value="menu_hover" id="ssw_menu_hover" name="ssw_menu">Hover</label>
+        </div>
+    </div>
+
+   #* <div class="gh_button-group">
+        <a class="btn btn-primary btn-sm" id="showCss" href="#">Show CSS</a>
+        <a class="btn btn-default btn-sm" id="resetDefault" href="#">Reset</a>
+    </div>*#
+    <div class="hide">
+        <ul id="ssw_styles">
+            <li style="display:none" class="small ssw_mbColor sepH_a">
+                body {
+					<span style="display:none" class="ssw_mColor sepH_a">
+						color: #
+						<span></span>
+						;
+					</span>
+					<span style="display:none" class="ssw_bColor">
+						background-color: #
+						<span></span>
+					</span>
+                }
+            </li>
+            <li style="display:none" class="small ssw_lColor sepH_a">
+                a { color: #
+                <span></span>
+                }
+            </li>
+        </ul>
+    </div>
+</div>

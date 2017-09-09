@@ -1,0 +1,144 @@
+<a class="sidebar_switch on_switch ttip_r" href="javamenu:void(0)" oldtitle="Hide Sidebar">Sidebar switch</a>
+<div class="sidebar">
+
+<div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 499px;"><div class="sidebar_inner_scroll" style="overflow: hidden; width: auto; height: 499px;">
+<div class="sidebar_inner" style="margin-bottom: -92px; min-height: 100%;">
+    <form method="post" class="input-group input-group-sm" action="#">
+        <span class="twitter-typeahead" style="position: relative; display: inline-block;"><input type="text" disabled="" spellcheck="off" autocomplete="off" class="tt-hint" style="position: absolute; top: 0px; left: 0px; border-color: transparent; box-shadow: none; background: none repeat scroll 0% 0% rgb(255, 255, 255);"><input type="text" placeholder="Search..." size="16" class="search_query form-control input-sm tt-query" name="query" autocomplete="off" spellcheck="false" style="position: relative; vertical-align: top; background-color: transparent;" dir="auto"><span style="position: absolute; left: -9999px; visibility: hidden; white-space: nowrap; font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif; font-size: 12px; font-style: normal; font-variant: normal; font-weight: 400; word-spacing: 0px; letter-spacing: 0px; text-indent: 0px; text-rendering: optimizelegibility; text-transform: none;"></span><span class="tt-dropdown-menu" style="position: absolute; top: 100%; left: 0px; z-index: 100; display: none;"></span></span>
+		<span class="input-group-btn">
+			<button class="btn btn-default" type="submit">
+                <i class="glyphicon glyphicon-search"></i>
+            </button>
+		</span>
+    </form>
+    <div class="panel-group" id="side_accordion">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#side_accordion" href="#collapseTwo">
+                    <i class="glyphicon glyphicon-tasks"></i> 销售管理
+                </a>
+            </div>
+            <div id="collapseTwo" class="accordion-body collapse #if($!menuParent == "sale" ) in #end">
+                <div class="panel-body">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li class="#if($!menu == "sale_order") active #end">
+                            <a href="$homeModule.getTarget("/sale/order/list.html")")">订单</a>
+                            <ul class="nav nav-pills nav-stacked">	
+                            	<li class="#if($!menu == "sale_order_add") active #end">
+                            		<a href="$homeModule.getTarget("/sale/order/add.html")")">添加</a>
+                            	</li>
+##                            	<li>
+##                            		<a href="$homeModule.getTarget("/sale/order/detail.html")")">详情</a>
+##                            	</li>
+                            </ul>
+                        </li>
+                    </ul>
+                 </div>
+                 <div class="panel-body">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li class="#if($!menu == "sale_report") active #end">
+                            <a href="$homeModule.getTarget("/sale/report/list.html")")">报表</a>
+                            <ul class="nav nav-pills nav-stacked">	
+                            	<li class="#if($!menu == " ") active #end">
+                            		<a href="$homeModule.getTarget("/sale/report/list.html?type=1")")">销售表表-按单据</a>
+                            	</li>
+                            	<li class="#if($!menu == " ") active #end">
+                            		<a href="$homeModule.getTarget("/sale/report/list.html?type=2")")">销售表表-按客户</a>
+                            	</li>
+                            </ul>
+                        </li>
+                    </ul>
+                 </div>
+                 <div class="panel-body">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li class="#if($!menu == "sale_customer") active #end">
+                            <a href="$homeModule.getTarget("/sale/customer/list.html")")">客户</a>
+                            <ul class="nav nav-pills nav-stacked">	
+##                            	<li class="#if($!menu == "sale_customer_detail") active #end">
+##                            		<a href="$homeModule.getTarget("/sale/customer/detail.html")")">客户订单详情</a>
+##                            	</li>
+                            	<li class="#if($!menu == "sale_customer_add") active #end">
+                            		<a href="$homeModule.getTarget("/sale/customer/add.html")")">添加</a>
+                            	</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+       </div>
+       <div class="panel panel-default">
+            <div class="panel-heading">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#side_accordion" href="#collapseThree">
+                    <i class="glyphicon glyphicon-time"></i> 财务管理
+                </a>
+            </div>
+            <div id="collapseThree" class="accordion-body collapse #if($!menuParent == "financial" ) in #end">
+                <div class="panel-body">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li class="#if($!menu == "financial_cost_list") active #end">
+                            <a href="$homeModule.getTarget("/financial/cost/list.html")">支出列表</a>
+                            <ul class="nav nav-pills nav-stacked">	
+                            	<li class="#if($!menu == "financial_cost_add") active #end">
+                            		<a href="$homeModule.getTarget("/financial/cost/add.html")")">新增支出</a>
+                            	</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="panel-body">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li class="#if($!menu == "financial_receive_list") active #end">
+                            <a href="$homeModule.getTarget("/financial/receive/list.html")">应收账款</a>
+                            <ul class="nav nav-pills nav-stacked">	
+                            	<li class="#if($!menu == "financial_receive_add") active #end">
+                            		<a href="$homeModule.getTarget("/financial/receive/add.html")")">新增收款</a>
+                            	</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+       </div>
+       <div class="panel panel-default">
+            <div class="panel-heading">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#side_accordion" href="#collapseFour">
+                    <i class="glyphicon glyphicon-time"></i> 设置
+                </a>
+            </div>
+            <div id="collapseFour" class="accordion-body collapse #if($!menuParent == "setting" ) in #end">
+                <div class="panel-body">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li class="#if($!menu == "setting_company_list") active #end">
+                            <a href="$homeModule.getTarget("/setting/company/list.html")">分公司</a>
+                            <ul class="nav nav-pills nav-stacked">
+                        		<li class="#if($!menu == "setting_company_add") active #end">
+                            		<a href="$homeModule.getTarget("/setting/company/add.html")">新增</a>
+                        		</li>
+                    		</ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="panel-body">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li class="#if($!menu == "setting_commodity_list") active #end">
+                            <a href="$homeModule.getTarget("/setting/commodity/list.html")">商品</a>
+                            <ul class="nav nav-pills nav-stacked">
+                        		<li class="#if($!menu == "setting_commodity_add") active #end">
+                            		<a href="$homeModule.getTarget("/setting/commodity/add.html")">新增</a>
+                        		</li>
+                    		</ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+       </div>
+
+    </div>
+
+    <div class="push" style="height: 92px;"></div>
+</div>
+
+
+</div><div class="slimScrollBar" style="background: none repeat scroll 0% 0% rgb(0, 0, 0); width: 7px; position: absolute; top: -351px; opacity: 0.2; display: block; border-radius: 7px; z-index: 99; left: 1px; height: 389.064px;"></div><div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: none repeat scroll 0% 0% rgb(51, 51, 51); opacity: 0.2; z-index: 90; left: 1px;"></div></div>
+
+</div>
